@@ -182,7 +182,10 @@ def main():
         # Make JSON output
         output = dict(type="FeatureCollection", features=[])
         for kindle_donor in kindle_donors:
-            output['features'].extend(kindle_donor.features)
+            if MODE == ONE_PER_QUANTITY:
+                output['features'].extend(kindle_donor.features)
+            else:
+                output['features'].extend([kindle_donor.feature])
         json_str = json.dumps(output)
         print(json_str)
 
